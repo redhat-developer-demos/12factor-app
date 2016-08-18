@@ -1,5 +1,7 @@
 # Helloworld-service
 
+The slides of these presentation are available at <http://bit.ly/12factor-app>
+
 Build and Deploy helloworld-service locally
 ------------------------------------------
 

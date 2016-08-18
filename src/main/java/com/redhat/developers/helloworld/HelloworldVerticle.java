@@ -94,7 +94,8 @@ public class HelloworldVerticle extends AbstractVerticle {
                     }
                 });
             } else {
-                ctx.response().end("No connection to the database");
+                res.cause().printStackTrace();
+                ctx.response().end("No connection to the database.");
             }
         });
     }
