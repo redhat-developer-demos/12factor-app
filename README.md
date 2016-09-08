@@ -1,6 +1,6 @@
-# Helloworld-service
+# Helloworld
 
-The slides of this presentation are available at <http://bit.ly/12factor-app>
+The slides of this presentation are available at <http://bit.ly/12factors-app>
 
 Build and Deploy helloworld-service locally
 ------------------------------------------
@@ -10,4 +10,4 @@ Build and Deploy helloworld-service locally
 
         mvn clean compile exec:java
 
-3. The application will be running at the following URL: <http://localhost:8080/api/hello>
+3. The application will be running at the following URL: <http://localhost:8080/api/hello/AnyName>
