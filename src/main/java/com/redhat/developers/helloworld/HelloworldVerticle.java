@@ -49,13 +49,6 @@ public class HelloworldVerticle extends AbstractVerticle {
             .allowedMethod(HttpMethod.GET)
             .allowedHeader("Content-Type"));
 
-        // hello endpoint
-        router.get("/api/hello/:name").handler(ctx -> {
-            String helloMsg = hello(ctx.request().getParam("name"));
-            logger.info("New request from " + ctx.request().getHeader("User-Agent") + "\nSaying...: " + helloMsg);
-            ctx.response().end(helloMsg);
-        });
-
         // Database endpoint
         router.get("/api/db").handler(ctx -> {
             logger.info("Reading records from the database");
