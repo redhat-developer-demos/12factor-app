@@ -13,7 +13,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-oc login --insecure-skip-tls-verify=true -u openshift-dev -p devel 10.1.2.2:8443
+oc login --insecure-skip-tls-verify=true -u openshift-dev -p devel https://$OPENSHIFT_IP:8443
 oc new-project 12factor-dev
 oc new-build --binary --name=my12factorapp
 echo "Project setup"

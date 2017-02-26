@@ -14,4 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 oc env dc/my12factorapp GREETING="Hi {name}! - My Configuration has changed"
-echo "Configuration updated. Please check again http://12factorappdemo.10.1.2.2.nip.io/api/hello/Rafael"
+echo "Configuration updated. Please check again http://12factorappdemo.$OPENSHIFT_IP.nip.io/api/hello/Rafael"

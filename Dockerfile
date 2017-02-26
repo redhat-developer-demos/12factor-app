@@ -24,3 +24,4 @@ ADD config.json /app/
 
 EXPOSE 8080
 
+ENTRYPOINT ["java", "-Dvertx.disableFileCPResolving=true", "-Xmx256m", "-jar", "/app/helloworld-service-fat.jar"]
