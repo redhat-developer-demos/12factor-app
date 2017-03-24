@@ -2,6 +2,10 @@
 
 The slides of this presentation are available at <http://bit.ly/12factors-app>
 
+To use the scripts, specify the OPENSHIFT_IP environment variable.
+
+Example: export OPENSHIFT_IP=35.185.41.87;
+
 Build and Deploy helloworld-service locally
 ------------------------------------------
 
