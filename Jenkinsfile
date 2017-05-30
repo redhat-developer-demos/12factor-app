@@ -66,7 +66,7 @@ podTemplate(
 
         stage ("PROD - Canary deploy") {
             sh "oc new-project 12factor || echo 'Project exists'"
-            sh "oc project 12factor
+            sh "oc project 12factor"
             sh "oc set probe dc/my12factorapp -n 12factor --readiness --get-url=http://:8080/api/health"
             sh "oc patch route/my12factorapp -n 12factor  -p '{\"spec\": {\"to\": {\"name\": \"demo\", \"weight\": 50 }}}'"
             sh "oc patch route demo -n 12factor  -p '{\"spec\":{\"alternateBackends\":[{\"kind\":\"Service\", \"name\":\"my12factorapp-${env.BUILD_NUMBER}\", \"weight\": 50}]}}'"
