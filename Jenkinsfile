@@ -18,7 +18,7 @@ podTemplate(
             sh "mvn package"
         }
 
-        stage("DEV - Image build") {
+        stage("DEV - Image Release") {
             echo 'Building docker image and deploying to Dev'
             sh "oc new-project 12factor-dev || echo 'Project exists'"
             sh "oc policy add-role-to-user admin developer -n 12factor-dev"
@@ -28,7 +28,7 @@ podTemplate(
             echo "This is the build number: ${env.BUILD_NUMBER}"
         }
         
-        stage ("DEV - Run"){
+        stage ("DEV - App RUN"){
             sh "oc new-app my12factorapp -n 12factor-dev  || echo 'Aplication already Exists'"
             sh "oc expose service my12factorapp -n 12factor-dev || echo 'Service already exposed'"
             sh "oc set probe dc/my12factorapp -n 12factor-dev --readiness --get-url=http://:8080/api/health"
@@ -39,7 +39,7 @@ podTemplate(
             sh "mvn -B -Dmaven.test.failure.ignore verify"
         }
 
-        stage("QA - App Deploy") {
+        stage("QA - App RUN") {
             echo 'Deploying to QA'
             sh "oc new-project 12factor-qa || echo 'Project exists'"
             sh "oc policy add-role-to-user admin developer -n 12factor-qa"
@@ -55,7 +55,7 @@ podTemplate(
             input 'Approve to production?'
         }
 
-        stage("PROD - App Deploy") {
+        stage("PROD - App RUN") {
             echo 'Deploying to production'
             sh "oc new-project 12factor || echo 'Project exists'"
             sh "oc policy add-role-to-user admin developer -n 12factor"
