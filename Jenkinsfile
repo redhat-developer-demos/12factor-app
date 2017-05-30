@@ -58,6 +58,7 @@ podTemplate(
         stage("PROD - App Deploy") {
             echo 'Deploying to production'
             sh "oc new-project 12factor || echo 'Project exists'"
+            sh "oc policy add-role-to-user admin developer -n 12factor"
             sh "oc project 12factor"
             sh "oc policy add-role-to-user system:image-puller system:serviceaccount:12factor:default -n 12factor-qa"
             sh "oc tag 12factor-qa/my12factorapp:latest 12factor/my12factorapp:${env.BUILD_NUMBER}"
