@@ -25,7 +25,6 @@ podTemplate(
             sh "oc project 12factor-dev"
             sh "oc new-build -n 12factor-dev --binary --name=my12factorapp || echo 'Build exists'"
             sh "oc start-build my12factorapp -n 12factor-dev --from-dir=. --follow"
-            echo "This is the build number: ${env.BUILD_NUMBER}"
         }
         
         stage ("DEV - App RUN"){
@@ -61,16 +60,11 @@ podTemplate(
             sh "oc policy add-role-to-user admin developer -n 12factor"
             sh "oc project 12factor"
             sh "oc policy add-role-to-user system:image-puller system:serviceaccount:12factor:default -n 12factor-qa"
-            sh "oc tag 12factor-qa/my12factorapp:latest 12factor/my12factorapp:${env.BUILD_NUMBER}"
-            sh "oc new-app -n 12factor --name my12factorapp-${env.BUILD_NUMBER} my12factorapp:${env.BUILD_NUMBER}" 
+            sh "oc tag 12factor-qa/my12factorapp:latest 12factor/my12factorapp:latest"
+            sh "oc new-app -n 12factor --name my12factorapp my12factorapp || echo 'Aplication already Exists'" 
+            sh "oc expose service my12factorapp -n 12factor || echo 'Service already exposed'"
+            sh "oc set probe dc/my12factorapp -n 12factor  --readiness --get-url=http://:8080/api/health"
         }
 
-        stage ("PROD - Canary deploy") {
-            sh "oc new-project 12factor || echo 'Project exists'"
-            sh "oc project 12factor"
-            sh "oc set probe dc/my12factorapp -n 12factor --readiness --get-url=http://:8080/api/health"
-            sh "oc patch route/my12factorapp -n 12factor  -p '{\"spec\": {\"to\": {\"name\": \"demo\", \"weight\": 50 }}}'"
-            sh "oc patch route demo -n 12factor  -p '{\"spec\":{\"alternateBackends\":[{\"kind\":\"Service\", \"name\":\"my12factorapp-${env.BUILD_NUMBER}\", \"weight\": 50}]}}'"
-        }
     }
 }    
