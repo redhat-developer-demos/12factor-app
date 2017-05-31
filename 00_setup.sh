@@ -21,7 +21,7 @@ oc create -f pipeline.yml -n ci
 #Setup Jenkins credentials
 oc login -u system:admin
 echo "Giving Jenkins SA a cluster-admin permission"
-oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:12factor-dev:jenkins -n 12factor-dev
+oc adm policy add-cluster-role-to-user cluster-admin system:serviceaccount:ci:jenkins -n ci
 oc login --insecure-skip-tls-verify=true -u developer -p developer https://$OPENSHIFT_IP:8443
 echo "Project setup"
 oc project 12factor-dev
