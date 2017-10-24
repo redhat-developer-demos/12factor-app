@@ -3,7 +3,7 @@ podTemplate(
     label: "myJenkins", 
     cloud: "openshift", 
     volumes: [
-        persistentVolumeClaim(claimName: "m2repo", mountPath: "/tmp/.m2")
+        persistentVolumeClaim(claimName: "m2repo", mountPath: "/home/jenkins/.m2/")
     ]) {
 
     node("myJenkins") {
