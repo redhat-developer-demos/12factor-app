@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM fabric8/java-jboss-openjdk8-jdk:1.1.7
+FROM fabric8/java-jboss-openjdk8-jdk:1.5.4
 
 ENV JAVA_APP_JAR helloworld-service-fat.jar
 ENV AB_OFF true

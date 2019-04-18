@@ -50,7 +50,7 @@
 
 		<!-- other plugin versions -->
         <version.exec.plugin>1.4.0</version.exec.plugin>
-        <vertx.version>3.3.2</vertx.version>
+        <vertx.version>3.7.0</vertx.version>
 
     </properties>
 
